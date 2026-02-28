@@ -1,12 +1,12 @@
 experiment:
   name: "wad_internvl3_training"
   version: "1.0"
-  description: "InternVL3-2B for Autonomous Driving"
-  tags: ["internvl3", "navigation", "mllm"]
+  description: "InternVL2-2B for Autonomous Driving"
+  tags: ["internvl2", "navigation", "mllm"]
 
 model:
   architecture: "internvl"
-  name: "OpenGVLab/InternVL3-2B"
+  name: "OpenGVLab/InternVL2-2B"
   trust_remote_code: true
   multimodal_max_length: 8192
 
