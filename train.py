@@ -110,8 +110,9 @@ def eval_model(model, val_loader, step, epoch, epochs):
             label_ids_batch = label_ids_batch.cuda()
             attention_mask_batch = attention_mask_batch.cuda()
             pixel_values_batch = pixel_values_batch.cuda()
+            image_flags_batch = torch.ones(pixel_values_batch.shape[:2], dtype=torch.long).cuda()
             outputs = model(
-                input_ids=input_ids_batch, pixel_values=pixel_values_batch, labels=label_ids_batch, return_dict=True
+                input_ids=input_ids_batch, pixel_values=pixel_values_batch, labels=label_ids_batch, image_flags=image_flags_batch, return_dict=True
             )
             loss = outputs.loss
             total_eval_loss += loss.item()
@@ -142,8 +143,9 @@ def train_model(model, train_loader, val_loader, val_loader_with_shuffle, epochs
             attention_mask_batch = attention_mask_batch.cuda()
             pixel_values_batch = pixel_values_batch.cuda()
 
+            image_flags_batch = torch.ones(pixel_values_batch.shape[:2], dtype=torch.long).cuda()
             outputs = model(
-                input_ids=input_ids_batch, pixel_values=pixel_values_batch, labels=label_ids_batch, return_dict=True
+                input_ids=input_ids_batch, pixel_values=pixel_values_batch, labels=label_ids_batch, image_flags=image_flags_batch, return_dict=True
             )
             
             loss = outputs.loss / NUM_ACCUMULATION_STEPS
