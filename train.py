@@ -10,6 +10,16 @@ from tqdm import tqdm
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
 from transformers import BitsAndBytesConfig, AutoModel, AutoTokenizer, get_cosine_schedule_with_warmup
 from logutil import init_logger, get_logger
+import random
+import numpy as np
+
+def set_seed(seed=42):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+
+set_seed(42)
 
 # 1. ĐỌC CONFIG VÀ KHỞI TẠO LOGGER NGAY LẬP TỨC (TRƯỚC KHI IMPORT MODEL)
 with open("internvl_config.yaml", "r") as f:
