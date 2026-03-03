@@ -9,14 +9,19 @@ class POLMData:
     """POLM structure from bbox annotations"""
     object_type: str
     bbox: List[float]  # [x1, y1, x2, y2]
-    confidence: float
-    
+    relative_position: str
+    distance_zone: str
+    coming_to_user: bool
+    speed: float
     def to_text(self) -> str:
         return (
-            f"[OBJ] {self.object_type} "
-            f"({self.bbox[0]:.3f}, {self.bbox[1]:.3f}, "
-            f"{self.bbox[2]:.3f}, {self.bbox[3]:.3f}) "
-            f"conf={self.confidence:.2f}"
+            f"[OBJ] {self.object_type}, "
+            f"({self.bbox[0]:.2f}, {self.bbox[1]:.2f}, "
+            f"{self.bbox[2]:.2f}, {self.bbox[3]:.2f}), "
+            f"pos={self.relative_position}, "
+            f"dist={self.distance_zone}, "
+            f"approaching={'yes' if self.coming_to_user else 'no'}, "
+            f"speed={self.speed:.2f}."
         )
 
 @dataclass
