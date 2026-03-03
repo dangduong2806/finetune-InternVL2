@@ -65,7 +65,8 @@ class WADDatasetForInternVL(Dataset):
                         speed = bbox.get('speed', 0.0),
                         )
                     polm_list.append(polm)
-        return polm_list
+                polm_list.sort(key=lambda x: x.distance_zone, reverse=True)
+        return polm_list[:15]
 
     def _select_frames_safe(self, frame_path: str, num_frames: int = 1) -> List[int]:
         available_frames = sorted(self.frame_index[frame_path].keys())

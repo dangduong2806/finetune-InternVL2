@@ -72,7 +72,7 @@ def dynamic_preprocess(image, min_num=1, max_num=2, image_size=448, use_thumbnai
         processed_images.append(thumbnail_img)
     return processed_images
 
-def process_image(image, input_size=448, max_num=12):
+def process_image(image, input_size=448, max_num=6):
     transform = build_transform(input_size=input_size)
     images = dynamic_preprocess(image, image_size=input_size, use_thumbnail=True, max_num=max_num)
     pixel_values = [transform(image) for image in images]
