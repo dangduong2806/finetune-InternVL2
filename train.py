@@ -302,7 +302,8 @@ if __name__ == "__main__":
     if hasattr(model.language_model, "get_input_embeddings"):
         model.language_model.get_input_embeddings().to(torch.bfloat16)
 
-    # hf_repo_id = "huyvanzzz/Internvl2.5-2b-lora-config"
+    # hf_repo_id = "huyvanzzz/Internvl2.5-2b-lora-config" sửa 1
+    #--------------------------#
     peft_config = LoraConfig(
         r=config['model']['lora']['r'],
         lora_alpha=config['model']['lora']['alpha'],
@@ -315,7 +316,9 @@ if __name__ == "__main__":
     model.language_model = get_peft_model(model.language_model, peft_config)
     model.language_model.print_trainable_parameters()
     model.train()
-    
+    #---------------------# comment lại hết
+
+    # Bỏ comment
     # model.language_model = PeftModel.from_pretrained(
     #     model.language_model,
     #     hf_repo_id,
@@ -353,7 +356,7 @@ if __name__ == "__main__":
         val_loader_with_shuffle=val_loader_with_shuffle,
         config=config,
         output_dir=output_dir,
-        # resume_dir=None,
-        # start_epoch=0,
-        # start_step=5,
+        # resume_dir=None, # Bỏ comment
+        # start_epoch=0, # Set theo file checkpoint
+        # start_step=5, # set theo file checkpoint
     )
